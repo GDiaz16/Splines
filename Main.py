@@ -105,7 +105,7 @@ class Application():
         self.root.mainloop()
 
     def fileDialog(self):
-        self.filename = filedialog.askopenfilename(initialdir = "/Universidad/Materias/Modelos estocasticos/Proyecto", title = "Seleccione un archivo")
+        self.filename = filedialog.askopenfilename(initialdir = "/Universidad/Materias/Modelos estocasticos/Proyecto", title = "Seleccione un archivo", filetypes=[('csv', '.csv'),])
         self.text.set(self.filename.split("/")[-1]) #ttk.Label(self.root, text=self.filename.name).grid(pady=0, row=1, column =0, columnspan=4)
 
         self.x = []
@@ -392,7 +392,7 @@ class Application():
             MessageBox.showinfo("Error", "Debe cargar un dataset")
 
     def save_results(self):
-        f = filedialog.asksaveasfile(mode="w", filetypes=[('csv', '.csv'),])
+        f = filedialog.asksaveasfile(mode="w",defaultextension="*.csv", filetypes=[('csv', '.csv'),])
         if f is None:
             return
 
