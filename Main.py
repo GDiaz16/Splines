@@ -10,6 +10,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import math as mt
+import tkinter.font as tkFont
 
 class Application():
     def __init__(self):
@@ -25,33 +26,48 @@ class Application():
         self.root.geometry("900x700")
         self.root.resizable(0,0)
 
+        titulo = tkFont.Font(family="Helvetica", size=18, weight=tkFont.BOLD)
+        titulo1 = tkFont.Font(family="Helvetica", size=14, weight=tkFont.BOLD)
+        titulo2 = tkFont.Font(family="Helvetica", size=12)
+        texto = tkFont.Font(family="Helvetica", size=10, weight=tkFont.BOLD)
+
+
+        self.label0 = ttk.Label(self.root, text="Predicciones con Expansión de Base", font=titulo)
+        self.label0.place(x=250, y=20, width=500, height=40)
+
+        self.label01 = ttk.Label(self.root, text="Ingresar datos", font=titulo1)
+        self.label01.place(x=20, y=40, width=200, height=40)
+
         self.boton1=ttk.Button(self.root, text = "Buscar un archivo", command = self.fileDialog)
-        self.boton1.place(x=20, y=20, width=150, height=30)
+        self.boton1.place(x=20, y=80, width=150, height=30)
 
         self.text = StringVar()
         self.text.set("Ruta")
-        self.path = ttk.Label(self.root, textvariable=self.text)
-        self.path.place(x=20, y=60, width=150, height=30)
+        self.path = ttk.Label(self.root, textvariable=self.text, font=texto)
+        self.path.place(x=20, y=120, width=150, height=30)
+
+        self.label01 = ttk.Label(self.root, text="Párametros", font=titulo1)
+        self.label01.place(x=20, y=160, width=200, height=40)
 
         self.boton2 = ttk.Button(self.root, text="Función a trozos constante", command=self.piecewise_constant)
-        self.boton2.place(x=20, y=100, width=250, height=30)
+        self.boton2.place(x=20, y=200, width=250, height=30)
 
         self.boton3 = ttk.Button(self.root, text="Función a trozos con regresión", command=self.piecewise_linear)
-        self.boton3.place(x=20, y=140, width=250, height=30)
+        self.boton3.place(x=20, y=240, width=250, height=30)
 
         self.boton4 = ttk.Button(self.root, text="Spline lineal", command=self.linear_spline)
-        self.boton4.place(x=20, y=180, width=250, height=30)
+        self.boton4.place(x=20, y=280, width=250, height=30)
 
         self.boton5 = ttk.Button(self.root, text="Spline cúbico", command=self.cubic_spline)
-        self.boton5.place(x=20, y=220, width=250, height=30)
+        self.boton5.place(x=20, y=320, width=250, height=30)
 
         self.boton6 = ttk.Button(self.root, text="Spline cúbico natural", command=self.natural_cubic_spline)
-        self.boton6.place(x=20, y=260, width=250, height=30)
+        self.boton6.place(x=20, y=360, width=250, height=30)
 
         self.label1 = ttk.Label(self.root, text="Número de nudos:")
-        self.label1.place(x=20, y=300, width=150, height=20)
+        self.label1.place(x=20, y=400, width=150, height=20)
         self.slider = ttk.Scale(self.root, from_=0.01, to = 1, orient=HORIZONTAL, command=self.setKnots)
-        self.slider.place(x=20, y=320, width=250, height=30)
+        self.slider.place(x=20, y=420, width=250, height=30)
 
         # Labels del slider
         self.text2 = StringVar()
@@ -61,31 +77,35 @@ class Application():
         self.text4 = StringVar()
         self.text4.set("1")
         self.label2 = ttk.Label(self.root, textvariable=self.text2)
-        self.label2.place(x=20, y=340, width=30, height=20)
+        self.label2.place(x=20, y=440, width=30, height=20)
         self.label3 = ttk.Label(self.root, textvariable=self.text3)
-        self.label3.place(x=125, y=340, width=30, height=20)
+        self.label3.place(x=125, y=440, width=30, height=20)
         self.label4 = ttk.Label(self.root, textvariable=self.text4)
-        self.label4.place(x=250, y=340, width=30, height=20)
+        self.label4.place(x=250, y=440, width=30, height=20)
+
+        # Separador
+        self.label01 = ttk.Label(self.root, text="Resultados", font=titulo1)
+        self.label01.place(x=20, y=470, width=200, height=40)
 
         # Label residual sum of squares
         self.text6 = StringVar()
         self.text6.set("0")
-        self.label5 = ttk.Label(self.root, text="Residual Sum of Squares:", font ="bold")
-        self.label5.place(x=20, y=370, width=250, height=20)
-        self.label6 = ttk.Label(self.root, textvariable=self.text6)
-        self.label6.place(x=20, y=390, width=250, height=20)
+        self.label5 = ttk.Label(self.root, text="Residual Sum of Squares:", font=titulo2)
+        self.label5.place(x=20, y=510, width=250, height=20)
+        self.label6 = ttk.Label(self.root, textvariable=self.text6, font=texto)
+        self.label6.place(x=20, y=530, width=250, height=20)
 
         # Label Mean Squared Error
         self.text8 = StringVar()
         self.text8.set("0")
-        self.label7 = ttk.Label(self.root,  text="Mean Squared Error", font ="bold")
-        self.label7.place(x=20, y=420, width=250, height=20)
-        self.label8 = ttk.Label(self.root, textvariable=self.text8)
-        self.label8.place(x=20, y=440, width=250, height=20)
+        self.label7 = ttk.Label(self.root,  text="Mean Squared Error", font=titulo2)
+        self.label7.place(x=20, y=560, width=250, height=20)
+        self.label8 = ttk.Label(self.root, textvariable=self.text8, font=texto)
+        self.label8.place(x=20, y=580, width=250, height=20)
 
         # Boton para descargar
         self.boton6 = ttk.Button(self.root, text="Guardar resultados", command=self.save_results)
-        self.boton6.place(x=80, y=500, width=130, height=30)
+        self.boton6.place(x=80, y=620, width=130, height=30)
 
         # Graficos de matplotlib
         self.data = []
@@ -96,11 +116,11 @@ class Application():
         self.ax0.plot(self.data)
 
         self.canvas = FigureCanvasTkAgg(self.f, master=self.root)
-        self.canvas.get_tk_widget().place(x=300, y=50, width=500, height=500)
+        self.canvas.get_tk_widget().place(x=300, y=110, width=550, height=500)
         self.canvas.draw()
 
         self.toolbar = NavigationToolbar2Tk(self.canvas, self.root)
-        self.toolbar.place(x=300, y=550, width=400, height=100)
+        self.toolbar.place(x=300, y=610, width=400, height=100)
         self.toolbar.update()
         self.root.mainloop()
 
@@ -150,8 +170,8 @@ class Application():
     def show_graph(self, x, y, y_est):
         rss, mse = self.residualSumOfSquares(y, y_est)
         self.y_est = y_est
-        self.text6.set(rss)
-        self.text8.set(mse)
+        self.text6.set("{:.5f}".format(rss))
+        self.text8.set("{:.5f}".format(mse))
         self.ax0.clear()
         self.ax0.scatter(x, y)
         self.ax0.plot(x, y_est, color='red', linewidth=3)
