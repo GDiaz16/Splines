@@ -36,13 +36,13 @@ class Application():
         self.label0.place(x=250, y=20, width=500, height=40)
 
         self.label01 = ttk.Label(self.root, text="Ingresar datos", font=titulo1)
-        self.label01.place(x=20, y=40, width=200, height=40)
+        self.label01.place(x=20, y=50, width=200, height=40)
 
         self.boton1=ttk.Button(self.root, text = "Buscar un archivo", command = self.fileDialog)
-        self.boton1.place(x=20, y=80, width=150, height=30)
+        self.boton1.place(x=20, y=90, width=150, height=30)
 
         self.text = StringVar()
-        self.text.set("Ruta")
+        self.text.set("Archivo")
         self.path = ttk.Label(self.root, textvariable=self.text, font=texto)
         self.path.place(x=20, y=120, width=150, height=30)
 
@@ -126,7 +126,7 @@ class Application():
 
     def fileDialog(self):
         self.filename = filedialog.askopenfilename(initialdir = "/Universidad/Materias/Modelos estocasticos/Proyecto", title = "Seleccione un archivo", filetypes=[('csv', '.csv'),])
-        self.text.set(self.filename.split("/")[-1]) #ttk.Label(self.root, text=self.filename.name).grid(pady=0, row=1, column =0, columnspan=4)
+        self.text.set("Archivo: "+self.filename.split("/")[-1]) #ttk.Label(self.root, text=self.filename.name).grid(pady=0, row=1, column =0, columnspan=4)
 
         self.x = []
         self.y = []
