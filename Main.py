@@ -64,7 +64,7 @@ class Application():
         self.boton6 = ttk.Button(self.root, text="Spline cúbico natural", command=self.natural_cubic_spline)
         self.boton6.place(x=20, y=360, width=250, height=30)
 
-        self.label1 = ttk.Label(self.root, text="Número de nudos:")
+        self.label1 = ttk.Label(self.root, text="Número de nudos:", font=texto)
         self.label1.place(x=20, y=400, width=150, height=20)
         self.slider = ttk.Scale(self.root, from_=0.01, to = 1, orient=HORIZONTAL, command=self.setKnots)
         self.slider.place(x=20, y=420, width=250, height=30)
@@ -78,7 +78,7 @@ class Application():
         self.text4.set("1")
         self.label2 = ttk.Label(self.root, textvariable=self.text2)
         self.label2.place(x=20, y=440, width=30, height=20)
-        self.label3 = ttk.Label(self.root, textvariable=self.text3)
+        self.label3 = ttk.Label(self.root, textvariable=self.text3, font=texto)
         self.label3.place(x=125, y=440, width=30, height=20)
         self.label4 = ttk.Label(self.root, textvariable=self.text4)
         self.label4.place(x=250, y=440, width=30, height=20)
