@@ -5,7 +5,7 @@ from tkinter import StringVar
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 import csv
-
+import math
 
 class Application():
     def __init__(self):
@@ -40,8 +40,26 @@ class Application():
         self.boton6 = ttk.Button(self.root, text="Spline cúbico natural", command=self.fileDialog)
         self.boton6.place(x=20, y=260, width=250, height=30)
 
-        self.slider = ttk.Scale(self.root, from_=1, to = 30, orient=HORIZONTAL, command=self.fileDialog)
-        self.slider.place(x=20, y=260, width=250, height=30)
+        self.label1 = ttk.Label(self.root, text="Número de nudos:")
+        self.label1.place(x=20, y=300, width=150, height=20)
+        self.slider = ttk.Scale(self.root, from_=0.01, to = 1, orient=HORIZONTAL, command=self.setKnots)
+        self.slider.place(x=20, y=320, width=250, height=30)
+
+        self.text2 = StringVar()
+        self.text2.set("1")
+        self.text3 = StringVar()
+        self.text3.set("1")
+        self.text4 = StringVar()
+        self.text4.set("1")
+        self.label2 = ttk.Label(self.root, textvariable=self.text2)
+        self.label2.place(x=20, y=340, width=30, height=20)
+        self.label3 = ttk.Label(self.root, textvariable=self.text3)
+        self.label3.place(x=125, y=340, width=30, height=20)
+        self.label4 = ttk.Label(self.root, textvariable=self.text4)
+        self.label4.place(x=250, y=340, width=30, height=20)
+
+        self.boton7 = ttk.Button(self.root, text="Aplicar", command=self.fileDialog)
+        self.boton7.place(x=220, y=360, width=50, height=30)
 
         # Graficos de matplotlib
         self.data = []
@@ -64,21 +82,31 @@ class Application():
         self.filename = filedialog.askopenfilename(initialdir = "/Universidad/Materias/Modelos estocasticos/Proyecto", title = "Seleccione un archivo")
         self.text.set(self.filename.split("/")[-1]) #ttk.Label(self.root, text=self.filename.name).grid(pady=0, row=1, column =0, columnspan=4)
 
-        x = []
-        y = []
+        self.x = []
+        self.y = []
         with open(self.filename, newline='') as f:
             reader = csv.reader(f)
             for row in reader:
                 try:
-                    x.append(float(row[0]))
-                    y.append((float(row[1])))
+                    self.x.append(float(row[0]))
+                    self.y.append((float(row[1])))
                 except:
                     pass
             #data =  list(reader)
             #self.data = data
             self.ax0.clear()
-            self.ax0.scatter(x,y)
+            self.ax0.scatter(self.x,self.y)
             self.canvas.draw()
+            self.text4.set(len(self.x)-1)
+
+    def setKnots(self, x_slider):
+        try:
+            knots = math.ceil((len(self.x)-1)*float(x_slider))
+            self.text3.set(knots)
+            print(knots)
+        except:
+            pass
+
 
 
 app = Application()
