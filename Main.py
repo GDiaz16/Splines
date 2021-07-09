@@ -21,7 +21,7 @@ class Application():
         #super(Application, self).__init__()
         self.root = Tk()
         self.root.geometry("800x600")
-        self.root.title("Base expansion predictions")
+        self.root.title("Basis expansion predictions")
 
         self.root.geometry("900x700")
         self.root.resizable(0,0)
@@ -126,7 +126,7 @@ class Application():
 
     def fileDialog(self):
         self.filename = filedialog.askopenfilename(initialdir = "/Universidad/Materias/Modelos estocasticos/Proyecto", title = "Seleccione un archivo", filetypes=[('csv', '.csv'),])
-        self.text.set("Archivo: "+self.filename.split("/")[-1]) #ttk.Label(self.root, text=self.filename.name).grid(pady=0, row=1, column =0, columnspan=4)
+        self.text.set("Archivo: "+self.filename.split("/")[-1])
 
         self.x = []
         self.y = []
@@ -138,8 +138,6 @@ class Application():
                     self.y.append((float(row[1])))
                 except:
                     pass
-            #data =  list(reader)
-            #self.data = data
             self.ax0.clear()
             self.ax0.scatter(self.x,self.y)
             self.canvas.draw()
